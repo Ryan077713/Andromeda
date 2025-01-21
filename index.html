@@ -1,0 +1,138 @@
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Andrômeda - Portal de Compartilhamento</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://kit.fontawesome.com/3cd69e2433.js" crossorigin="anonymous"></script>
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+</head>
+<body>
+  <div class="stars"></div>
+  <div class="twinkling"></div>
+  
+  <header>
+    <nav>
+      <div class="logo">
+        <img src="DALL·E 2025-01-21 17.08.23 - A visually striking image featuring the name 'Andromeda' in a cosmic, futuristic style. The text is rendered in a glowing, neon-like font with a galax.png" alt="Andrômeda Logo">
+        <h1>Andrômeda</h1>
+      </div>
+      <ul>
+        <li><a href="#social">Redes Sociais</a></li>
+        <li><a href="#downloads">Downloads</a></li>
+        <li>
+          <button id="loginBtn" class="login-btn">Entrar</button>
+          <button id="registerBtn" class="login-btn">Registrar</button>
+          <button id="logoutBtn" class="login-btn hidden">Sair</button>
+          <div id="g_id_onload"
+               data-client_id="SEU_CLIENT_ID_AQUI"
+               data-callback="handleCredentialResponse"
+               data-auto_prompt="false">
+          </div>
+          <div class="g_id_signin admin-only hidden"
+               data-type="standard"
+               data-size="large"
+               data-theme="filled_black"
+               data-text="sign_in_with"
+               data-shape="rectangular"
+               data-logo_alignment="left">
+          </div>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Modal de Login -->
+  <div id="loginModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>Login</h2>
+      <form id="loginForm" class="auth-form">
+        <div class="form-group">
+          <input type="text" id="loginUsername" placeholder="Nome de usuário" required>
+          <input type="password" id="loginPassword" placeholder="Senha" required>
+          <button type="submit" class="login-submit-btn">Entrar</button>
+        </div>
+        <p class="admin-login-text">Admin? <a href="#" id="showAdminLogin">Clique aqui</a></p>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal de Registro -->
+  <div id="registerModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>Registrar</h2>
+      <form id="registerForm" class="auth-form">
+        <div class="form-group">
+          <input type="text" id="regUsername" placeholder="Nome de usuário" required>
+          <input type="password" id="regPassword" placeholder="Senha" required>
+          <input type="password" id="regPasswordConfirm" placeholder="Confirme a senha" required>
+          <button type="submit" class="login-submit-btn">Registrar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <main>
+    <section id="social" class="section">
+      <h2>Redes Sociais</h2>
+      <div class="social-links">
+        <a href="https://www.youtube.com/@Ryan0777-b8p" class="social-card youtube" target="_blank">
+          <i class="fab fa-youtube"></i>
+          <h3>Ryan0777</h3>
+          <p>Canal Principal</p>
+        </a>
+        <a href="https://www.youtube.com/@polar0777" class="social-card youtube" target="_blank">
+          <i class="fab fa-youtube"></i>
+          <h3>Polar0777</h3>
+          <p>Canal do YouTube</p>
+        </a>
+        <a href="https://www.youtube.com/@Beneh1" class="social-card youtube" target="_blank">
+          <i class="fab fa-youtube"></i>
+          <h3>Beneh</h3>
+          <p>Canal do YouTube</p>
+        </a>
+        <a href="https://www.youtube.com/@Hasta0777" class="social-card youtube" target="_blank">
+          <i class="fab fa-youtube"></i>
+          <h3>Hasta0777</h3>
+          <p>Canal do YouTube</p>
+        </a>
+        <a href="https://www.youtube.com/@nekis5683" class="social-card youtube" target="_blank">
+          <i class="fab fa-youtube"></i>
+          <h3>Nekis</h3>
+          <p>Canal do YouTube</p>
+        </a>
+        <a href="https://discord.gg/u44b2rQpH3" class="social-card discord" target="_blank">
+          <i class="fab fa-discord"></i>
+          <h3>Discord</h3>
+          <p>Entre no nosso servidor!</p>
+        </a>
+      </div>
+    </section>
+
+    <section id="downloads" class="section">
+      <h2>Downloads</h2>
+      <div id="links-container" class="downloads-grid">
+        <!-- Links serão adicionados aqui dinamicamente -->
+      </div>
+      
+      <form id="link-form" class="add-link-form">
+        <h3>Adicionar Novo Link</h3>
+        <div class="form-group">
+          <input type="text" id="link-name" placeholder="Nome do arquivo" required>
+          <input type="url" id="link-url" placeholder="URL do arquivo" required>
+          <textarea id="link-description" placeholder="Descrição (opcional)"></textarea>
+          <button type="submit" class="download-btn">Adicionar Link</button>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2024 Andrômeda. Todos os direitos reservados.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
