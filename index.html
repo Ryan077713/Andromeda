@@ -2,58 +2,130 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Andrômeda - Portal de Compartilhamento</title>
+  <title>Andromeda Minecraft - Portal da Comunidade</title>
   <link rel="stylesheet" href="styles.css">
-  <script src="https://kit.fontawesome.com/3cd69e2433.js" crossorigin="anonymous"></script>
-  <script src="https://accounts.google.com/gsi/client" async defer></script>
+  <link href="https://fonts.cdnfonts.com/css/minecraft-4" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
-  <div class="stars"></div>
-  <div class="twinkling"></div>
-  
   <header>
     <nav>
       <div class="logo">
-        <img src="DALL·E 2025-01-21 17.08.23 - A visually striking image featuring the name 'Andromeda' in a cosmic, futuristic style. The text is rendered in a glowing, neon-like font with a galax.png" alt="Andrômeda Logo">
-        <h1>Andrômeda</h1>
+        <h1>
+          <i class="fas fa-cube"></i> 
+          Andromeda Minecraft
+        </h1>
       </div>
-      <ul>
-        <li><a href="#social">Redes Sociais</a></li>
-        <li><a href="#downloads">Downloads</a></li>
-        <li>
-          <button id="loginBtn" class="login-btn">Entrar</button>
-          <button id="registerBtn" class="login-btn">Registrar</button>
-          <button id="logoutBtn" class="login-btn hidden">Sair</button>
-          <div id="g_id_onload"
-               data-client_id="SEU_CLIENT_ID_AQUI"
-               data-callback="handleCredentialResponse"
-               data-auto_prompt="false">
-          </div>
-          <div class="g_id_signin admin-only hidden"
-               data-type="standard"
-               data-size="large"
-               data-theme="filled_black"
-               data-text="sign_in_with"
-               data-shape="rectangular"
-               data-logo_alignment="left">
-          </div>
-        </li>
-      </ul>
+      <div class="nav-links">
+        <a href="#home"><i class="fas fa-home"></i> Home</a>
+        <a href="#youtube"><i class="fab fa-youtube"></i> YouTube</a>
+        <a href="#discord"><i class="fab fa-discord"></i> Discord</a>
+        <a href="#duvidas"><i class="fas fa-question-circle"></i> Dúvidas</a>
+        <a href="#downloads"><i class="fas fa-download"></i> Downloads</a>
+        <a href="#chat"><i class="fas fa-comments"></i> Chat</a>
+        <div class="auth-buttons">
+          <button id="loginBtn"><i class="fas fa-sign-in-alt"></i> Login</button>
+          <button id="registerBtn"><i class="fas fa-user-plus"></i> Registrar</button>
+        </div>
+      </div>
     </nav>
   </header>
+
+  <main>
+    <section id="home" class="section">
+      <h2><i class="fas fa-star"></i> Bem-vindo ao Andromeda Minecraft</h2>
+      <p>Sua comunidade épica de Minecraft! Explore, construa e divirta-se conosco.</p>
+      <div class="galaxy-animation"></div>
+    </section>
+
+    <section id="youtube" class="section">
+      <h2><i class="fab fa-youtube"></i> Nossos Canais</h2>
+      <p>Confira nossos vídeos de Minecraft, tutoriais e gameplays!</p>
+      <div class="youtube-channels">
+        <div class="channel-grid">
+          <div class="channel-card">
+            <h3>Ryan0777</h3>
+            <iframe width="280" height="157" src="https://www.youtube.com/embed?listType=user&list=@Ryan0777-b8p" frameborder="0" allowfullscreen></iframe>
+            <a href="https://www.youtube.com/@Ryan0777-b8p" target="_blank" class="channel-link">Visitar Canal</a>
+          </div>
+          <div class="channel-card">
+            <h3>Polar0777</h3>
+            <iframe width="280" height="157" src="https://www.youtube.com/embed?listType=user&list=@polar0777" frameborder="0" allowfullscreen></iframe>
+            <a href="https://www.youtube.com/@polar0777" target="_blank" class="channel-link">Visitar Canal</a>
+          </div>
+          <div class="channel-card">
+            <h3>Nekis</h3>
+            <iframe width="280" height="157" src="https://www.youtube.com/embed?listType=user&list=@nekis5683" frameborder="0" allowfullscreen></iframe>
+            <a href="https://www.youtube.com/@nekis5683" target="_blank" class="channel-link">Visitar Canal</a>
+          </div>
+          <div class="channel-card">
+            <h3>Beneh</h3>
+            <iframe width="280" height="157" src="https://www.youtube.com/embed?listType=user&list=@Beneh1" frameborder="0" allowfullscreen></iframe>
+            <a href="https://www.youtube.com/@Beneh1" target="_blank" class="channel-link">Visitar Canal</a>
+          </div>
+          <div class="channel-card">
+            <h3>Hasta0777</h3>
+            <iframe width="280" height="157" src="https://www.youtube.com/embed?listType=user&list=@Hasta0777" frameborder="0" allowfullscreen></iframe>
+            <a href="https://www.youtube.com/@Hasta0777" target="_blank" class="channel-link">Visitar Canal</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="discord" class="section">
+      <h2><i class="fab fa-discord"></i> Servidor Discord</h2>
+      <div class="discord-container">
+        <iframe src="https://discord.com/widget?id=u44b2rQpH3&theme=dark" width="350" height="500" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
+        <div class="discord-join">
+          <p>Junte-se à nossa comunidade no Discord!</p>
+          <a href="https://discord.gg/u44b2rQpH3" target="_blank" class="discord-button">
+            <i class="fab fa-discord"></i> Entrar no Servidor
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section id="duvidas" class="section">
+      <h2><i class="fas fa-question-circle"></i> Área de Dúvidas</h2>
+      <div class="duvidas-container">
+        <div class="duvida-form">
+          <textarea placeholder="Digite sua dúvida aqui..."></textarea>
+          <button>Enviar Dúvida</button>
+        </div>
+        <div class="duvidas-list">
+          <!-- Dúvidas serão carregadas aqui -->
+        </div>
+      </div>
+    </section>
+
+    <section id="downloads" class="section vip-area">
+      <h2><i class="fas fa-crown"></i> Área VIP Minecraft</h2>
+      <div class="downloads-container">
+        <p>Acesse mapas exclusivos, texturas especiais e muito mais!</p>
+      </div>
+    </section>
+
+    <section id="chat" class="section">
+      <h2><i class="fas fa-comments"></i> Chat da Comunidade</h2>
+      <div class="chat-container">
+        <div class="chat-messages"></div>
+        <div class="chat-input">
+          <input type="text" placeholder="Digite sua mensagem...">
+          <button>Enviar</button>
+        </div>
+      </div>
+    </section>
+  </main>
 
   <!-- Modal de Login -->
   <div id="loginModal" class="modal">
     <div class="modal-content">
       <span class="close">&times;</span>
-      <h2>Login</h2>
-      <form id="loginForm" class="auth-form">
-        <div class="form-group">
-          <input type="text" id="loginUsername" placeholder="Nome de usuário" required>
-          <input type="password" id="loginPassword" placeholder="Senha" required>
-          <button type="submit" class="login-submit-btn">Entrar</button>
-        </div>
-        <p class="admin-login-text">Admin? <a href="#" id="showAdminLogin">Clique aqui</a></p>
+      <h2><i class="fas fa-sign-in-alt"></i> Login</h2>
+      <form id="loginForm">
+        <input type="text" placeholder="Nome de usuário" required>
+        <input type="password" placeholder="Senha" required>
+        <button type="submit">Entrar</button>
       </form>
     </div>
   </div>
@@ -62,77 +134,20 @@
   <div id="registerModal" class="modal">
     <div class="modal-content">
       <span class="close">&times;</span>
-      <h2>Registrar</h2>
-      <form id="registerForm" class="auth-form">
-        <div class="form-group">
-          <input type="text" id="regUsername" placeholder="Nome de usuário" required>
-          <input type="password" id="regPassword" placeholder="Senha" required>
-          <input type="password" id="regPasswordConfirm" placeholder="Confirme a senha" required>
-          <button type="submit" class="login-submit-btn">Registrar</button>
-        </div>
+      <h2><i class="fas fa-user-plus"></i> Registro</h2>
+      <form id="registerForm">
+        <input type="text" placeholder="Nome de usuário" required>
+        <input type="password" placeholder="Senha" required>
+        <input type="password" placeholder="Confirmar Senha" required>
+        <button type="submit">Registrar</button>
       </form>
     </div>
   </div>
 
-  <main>
-    <section id="social" class="section">
-      <h2>Redes Sociais</h2>
-      <div class="social-links">
-        <a href="https://www.youtube.com/@Ryan0777-b8p" class="social-card youtube" target="_blank">
-          <i class="fab fa-youtube"></i>
-          <h3>Ryan0777</h3>
-          <p>Canal Principal</p>
-        </a>
-        <a href="https://www.youtube.com/@polar0777" class="social-card youtube" target="_blank">
-          <i class="fab fa-youtube"></i>
-          <h3>Polar0777</h3>
-          <p>Canal do YouTube</p>
-        </a>
-        <a href="https://www.youtube.com/@Beneh1" class="social-card youtube" target="_blank">
-          <i class="fab fa-youtube"></i>
-          <h3>Beneh</h3>
-          <p>Canal do YouTube</p>
-        </a>
-        <a href="https://www.youtube.com/@Hasta0777" class="social-card youtube" target="_blank">
-          <i class="fab fa-youtube"></i>
-          <h3>Hasta0777</h3>
-          <p>Canal do YouTube</p>
-        </a>
-        <a href="https://www.youtube.com/@nekis5683" class="social-card youtube" target="_blank">
-          <i class="fab fa-youtube"></i>
-          <h3>Nekis</h3>
-          <p>Canal do YouTube</p>
-        </a>
-        <a href="https://discord.gg/u44b2rQpH3" class="social-card discord" target="_blank">
-          <i class="fab fa-discord"></i>
-          <h3>Discord</h3>
-          <p>Entre no nosso servidor!</p>
-        </a>
-      </div>
-    </section>
-
-    <section id="downloads" class="section">
-      <h2>Downloads</h2>
-      <div id="links-container" class="downloads-grid">
-        <!-- Links serão adicionados aqui dinamicamente -->
-      </div>
-      
-      <form id="link-form" class="add-link-form">
-        <h3>Adicionar Novo Link</h3>
-        <div class="form-group">
-          <input type="text" id="link-name" placeholder="Nome do arquivo" required>
-          <input type="url" id="link-url" placeholder="URL do arquivo" required>
-          <textarea id="link-description" placeholder="Descrição (opcional)"></textarea>
-          <button type="submit" class="download-btn">Adicionar Link</button>
-        </div>
-      </form>
-    </section>
-  </main>
-
   <footer>
-    <p>&copy; 2024 Andrômeda. Todos os direitos reservados.</p>
+    <p>&copy; 2024 Andromeda - Portal da Comunidade. Todos os direitos reservados.</p>
   </footer>
 
-  <script src="script.js"></script>
+  <script src="app.js"></script>
 </body>
 </html>

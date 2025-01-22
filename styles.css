@@ -1,8 +1,15 @@
 :root {
-  --primary-color: #6a1b9a;
-  --secondary-color: #9c27b0;
-  --background-dark: #121212;
-  --text-light: #ffffff;
+  --primary-color: #2c3e50;
+  --secondary-color: #27ae60;
+  --accent-color: #3498db;
+  --background-color: #1a1a1a;
+  --text-color: #ecf0f1;
+  --minecraft-font: 'MinecraftiaRegular', 'VT323', monospace;
+}
+
+@font-face {
+  font-family: 'MinecraftiaRegular';
+  src: url('https://fonts.cdnfonts.com/css/minecraft-4') format('woff');
 }
 
 * {
@@ -12,440 +19,437 @@
 }
 
 body {
-  font-family: 'Arial', sans-serif;
-  background-color: var(--background-dark);
-  color: var(--text-light);
+  font-family: var(--minecraft-font);
   line-height: 1.6;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  background-image: url("data:image/svg+xml,%3Csvg width='64' height='64' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M8 8h48v48H8z' fill='%23222' fill-opacity='.1'/%3E%3C/svg%3E");
 }
 
-/* Animação de estrelas */
-.stars, .twinkling {
+header {
+  background-color: rgba(44, 62, 80, 0.9);
+  backdrop-filter: blur(5px);
+  border-bottom: 4px solid var(--secondary-color);
+  padding: 1.5rem;
   position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1000;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+.nav-links a:hover {
+  color: var(--secondary-color);
+}
+
+.auth-buttons {
+  display: flex;
+  gap: 1rem;
+}
+
+button {
+  font-family: var(--minecraft-font);
+  background-color: var(--secondary-color);
+  border: 2px solid #1e8449;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  position: relative;
+  overflow: hidden;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transition: 0.5s;
+}
+
+button:hover::after {
+  left: 100%;
+}
+
+main {
+  margin-top: 100px;
+  padding: 2rem;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.logo h1 {
+  font-family: var(--minecraft-font);
+  font-size: 2rem;
+  background: linear-gradient(45deg, #3498db, #9b59b6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+  letter-spacing: 2px;
+  position: relative;
+  padding-bottom: 10px;
+  white-space: nowrap;
+}
+
+.logo h1::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--secondary-color), transparent);
+  animation: glow 2s infinite;
+}
+
+.section {
+  background: rgba(44, 62, 80, 0.8);
+  border: 2px solid var(--secondary-color);
+  box-shadow: 0 0 15px rgba(39, 174, 96, 0.3);
+  backdrop-filter: blur(5px);
+  margin-bottom: 3rem;
+  padding: 2rem;
+  border-radius: 8px;
+}
+
+.youtube-container, .discord-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.duvidas-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.duvida-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.duvida-form textarea {
+  padding: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  resize: vertical;
+  min-height: 100px;
+}
+
+.chat-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  height: 400px;
+}
+
+.chat-messages {
+  flex-grow: 1;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 1rem;
+  overflow-y: auto;
+  background: rgba(0, 0, 0, 0.5);
+  border: 2px solid var(--secondary-color);
+  font-family: var(--minecraft-font);
+}
+
+.chat-input {
+  display: flex;
+  gap: 1rem;
+}
+
+.chat-input input {
+  flex-grow: 1;
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.5);
+  z-index: 1001;
+}
+
+.modal-content {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 8px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  max-width: 400px;
+}
+
+.close {
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+  cursor: pointer;
+  font-size: 1.5rem;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+form input {
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.galaxy-animation {
+  width: 100%;
+  height: 400px;
+  background: url('/DALL·E 2025-01-21 22.22.43 - A sleek, futuristic logo with the word \'Andromeda\' in bold, modern font, placed on a dark background with subtle galaxy-themed elements like stars and.png') center/cover no-repeat;
+  margin: 2rem auto;
+  border-radius: 15px;
+  box-shadow: 0 0 30px rgba(52, 152, 219, 0.3);
+  position: relative;
+  overflow: hidden;
+  animation: pulse 4s infinite ease-in-out;
+}
+
+.galaxy-animation::before {
+  content: '';
+  position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  width: 100%;
-  height: 100%;
+  background: linear-gradient(45deg, rgba(52, 152, 219, 0.2), rgba(155, 89, 182, 0.2));
+  animation: shimmer 6s infinite linear;
 }
 
-.stars {
-  background: #000 url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="1" fill="white"/></svg>') repeat;
-  z-index: -2;
+@keyframes pulse {
+  0%, 100% { 
+    transform: scale(1);
+    box-shadow: 0 0 30px rgba(52, 152, 219, 0.3);
+  }
+  50% { 
+    transform: scale(1.02);
+    box-shadow: 0 0 50px rgba(52, 152, 219, 0.5);
+  }
 }
 
-.twinkling {
-  background: transparent;
-  z-index: -1;
-  animation: twinkle 4s linear infinite;
-}
-
-@keyframes twinkle {
+@keyframes shimmer {
   0% { opacity: 0.3; }
-  50% { opacity: 0.6; }
+  50% { opacity: 0.7; }
   100% { opacity: 0.3; }
 }
 
-/* Header e Navegação */
-header {
-  background: rgba(0, 0, 0, 0.8);
-  padding: 1rem;
-  position: fixed;
-  width: 100%;
+@keyframes glow {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+.minecraft-block {
+  width: 32px;
+  height: 32px;
+  image-rendering: pixelated;
+  display: inline-block;
+  margin: 0 5px;
+  animation: bounce 1s infinite ease-in-out;
+}
+
+.vip-area {
+  background: linear-gradient(135deg, rgba(44, 62, 80, 0.9), rgba(39, 174, 96, 0.2));
+  border: 2px solid #f1c40f;
+  position: relative;
+  overflow: hidden;
+}
+
+.vip-area::before {
+  content: '';
+  position: absolute;
   top: 0;
-  z-index: 100;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url("data:image/svg+xml,%3Csvg width='32' height='32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h4v4H0V0zm4 4h4v4H4V4z' fill='%23f1c40f' fill-opacity='.1'/%3E%3C/svg%3E");
+  animation: scroll 20s linear infinite;
+  opacity: 0.1;
 }
 
-nav {
-  max-width: 1200px;
-  margin: 0 auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+@keyframes scroll {
+  from { transform: translateY(0); }
+  to { transform: translateY(-50%); }
 }
 
-.logo {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
+.youtube-channels {
+  padding: 2rem 0;
 }
 
-.logo img {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  object-fit: cover;
+.channel-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  justify-items: center;
+}
+
+.channel-card {
+  background: rgba(0, 0, 0, 0.3);
   border: 2px solid var(--secondary-color);
-  box-shadow: 0 0 15px var(--secondary-color);
+  border-radius: 8px;
+  padding: 1rem;
+  text-align: center;
   transition: transform 0.3s ease;
 }
 
-.logo img:hover {
-  transform: scale(1.1);
-}
-
-.logo h1 {
-  font-size: 1.5rem;
-  color: var(--text-light);
-  text-shadow: 0 0 10px var(--secondary-color);
-}
-
-nav ul {
-  display: flex;
-  list-style: none;
-  gap: 2rem;
-}
-
-nav a {
-  color: var(--text-light);
-  text-decoration: none;
-  transition: color 0.3s;
-}
-
-nav a:hover {
-  color: var(--secondary-color);
-}
-
-/* Main Content */
-main {
-  padding-top: 80px;
-}
-
-.section {
-  padding: 4rem 2rem;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-h2 {
-  text-align: center;
-  margin-bottom: 2rem;
-  color: var(--secondary-color);
-}
-
-/* Social Cards */
-.social-links {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 2rem;
-  margin: 0 auto;
-  max-width: 1400px;
-}
-
-.social-card {
-  background: rgba(255, 255, 255, 0.1);
-  padding: 2rem;
-  border-radius: 10px;
-  text-align: center;
-  transition: transform 0.3s, box-shadow 0.3s;
-  text-decoration: none;
-  color: var(--text-light);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 200px;
-}
-
-.social-card:hover {
+.channel-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 5px 15px rgba(156, 39, 176, 0.3);
 }
 
-.social-card i {
-  font-size: 3rem;
-  margin-bottom: 1rem;
-}
-
-.social-card h3 {
-  font-size: 1.5rem;
-  margin-bottom: 0.5rem;
-  color: var(--text-light);
-}
-
-.social-card p {
-  color: rgba(255, 255, 255, 0.8);
-}
-
-.youtube i {
-  color: #ff0000;
-}
-
-.discord {
-  background: linear-gradient(45deg, #7289da33, #7289da66);
-  border: 2px solid #7289da;
-}
-
-.discord:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 5px 15px rgba(114, 137, 218, 0.3);
-  background: linear-gradient(45deg, #7289da44, #7289da77);
-}
-
-.discord i {
-  color: #7289da;
-}
-
-/* Downloads Section */
-.downloads-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 2rem;
-  margin-bottom: 2rem;
-}
-
-.download-card {
-  background: rgba(255, 255, 255, 0.1);
-  padding: 2rem;
-  border-radius: 10px;
-  text-align: center;
-  position: relative;
-}
-
-.download-card i {
-  font-size: 3rem;
+.channel-card h3 {
   margin-bottom: 1rem;
   color: var(--secondary-color);
 }
 
-.download-btn {
-  background: var(--primary-color);
-  color: var(--text-light);
-  border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background 0.3s;
+.channel-link {
+  display: inline-block;
   margin-top: 1rem;
-}
-
-.download-btn:hover {
-  background: var(--secondary-color);
-}
-
-.add-link-form {
-  display: none;
-  max-width: 600px;
-  margin: 2rem auto;
-  background: rgba(255, 255, 255, 0.1);
-  padding: 2rem;
-  border-radius: 10px;
-}
-
-.admin-logged-in .add-link-form {
-  display: block;
-}
-
-.add-link-form h3 {
-  text-align: center;
-  margin-bottom: 1.5rem;
-  color: var(--secondary-color);
-}
-
-.form-group {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-.form-group input,
-.form-group textarea {
-  padding: 0.8rem;
-  border-radius: 5px;
-  border: none;
-  background: rgba(255, 255, 255, 0.1);
-  color: var(--text-light);
-}
-
-.form-group textarea {
-  min-height: 100px;
-  resize: vertical;
-}
-
-.delete-link {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background: rgba(255, 0, 0, 0.6);
+  padding: 0.5rem 1rem;
+  background-color: var(--secondary-color);
   color: white;
-  border: none;
-  border-radius: 50%;
-  width: 25px;
-  height: 25px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background 0.3s;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: background-color 0.3s;
 }
 
-.delete-link:hover {
-  background: rgba(255, 0, 0, 0.8);
+.channel-link:hover {
+  background-color: #219a52;
 }
 
-/* Contact Form */
-#contact-form,
-#contact-form input,
-#contact-form textarea,
-#contact-form button {
-  display: none;
-}
-
-/* Estilos para o botão de login */
-.login-btn {
-  background: var(--primary-color);
-  color: var(--text-light);
-  border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background 0.3s;
-}
-
-.login-btn:hover {
-  background: var(--secondary-color);
-}
-
-/* Estilos para autenticação */
-.auth-form {
+.discord-container {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  align-items: center;
+  gap: 2rem;
 }
 
-.auth-form input {
-  padding: 0.8rem;
-  border-radius: 5px;
-  border: 1px solid var(--secondary-color);
-  background: rgba(255, 255, 255, 0.1);
-  color: var(--text-light);
-}
-
-.auth-form button {
-  background: var(--primary-color);
-  color: var(--text-light);
-  border: none;
-  padding: 0.8rem;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background 0.3s;
-}
-
-.auth-form button:hover {
-  background: var(--secondary-color);
-}
-
-/* Estilos para o modal */
-.modal {
-  display: none;
-  position: fixed;
-  z-index: 1000;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.8);
-}
-
-.modal.active {
-  display: block !important;
-}
-
-.modal-content {
-  background: var(--background-dark);
-  margin: 15% auto;
-  padding: 2rem;
-  border: 2px solid var(--secondary-color);
-  border-radius: 10px;
-  width: 80%;
-  max-width: 500px;
-  position: relative;
-}
-
-.close {
-  color: var(--text-light);
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-.close:hover {
-  color: var(--secondary-color);
-}
-
-.login-submit-btn {
-  background: var(--primary-color);
-  color: var(--text-light);
-  border: none;
-  padding: 0.8rem;
-  border-radius: 5px;
-  cursor: pointer;
-  width: 100%;
-  margin-top: 1rem;
-  transition: background 0.3s;
-}
-
-.login-submit-btn:hover {
-  background: var(--secondary-color);
-}
-
-.admin-login-text {
+.discord-join {
   text-align: center;
-  margin-top: 1rem;
 }
 
-.admin-login-text a {
-  color: var(--secondary-color);
+.discord-button {
+  display: inline-block;
+  padding: 1rem 2rem;
+  background-color: #7289da;
+  color: white;
   text-decoration: none;
+  border-radius: 4px;
+  margin-top: 1rem;
+  transition: background-color 0.3s;
 }
 
-.admin-login-text a:hover {
-  text-decoration: underline;
+.discord-button:hover {
+  background-color: #5b6eae;
 }
 
-/* Footer */
 footer {
   text-align: center;
-  padding: 2rem;
-  background: rgba(0, 0, 0, 0.8);
+  padding: 1rem;
+  background-color: var(--primary-color);
+  color: white;
   margin-top: 2rem;
 }
 
-/* Responsividade */
-@media (max-width: 768px) {
-  nav {
-    flex-direction: column;
-    gap: 1rem;
-  }
-
-  nav ul {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .section {
-    padding: 2rem 1rem;
-  }
+.duvida {
+  background: rgba(39, 174, 96, 0.1);
+  border-left: 3px solid var(--secondary-color);
+  padding: 1rem;
+  border-radius: 4px;
+  margin-bottom: 1rem;
 }
 
-.admin-only {
-  display: none;
+.resposta {
+  background: rgba(52, 152, 219, 0.1);
+  border-left: 3px solid var(--accent-color);
+  margin-top: 0.5rem;
+  padding: 0.5rem;
+  border-radius: 4px;
 }
 
-.hidden {
-  display: none !important;
-}
-
-/* Ajustes para o botão do Google Sign-In */
-.g_id_signin {
-  margin-right: 10px;
-}
-
-.admin-controls {
-  display: none;
-}
-
-.admin-logged-in .admin-controls {
+.duvida small {
   display: block;
+  color: #666;
+  margin-top: 0.5rem;
+}
+
+.admin-panel {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+@media (max-width: 768px) {
+  .nav-links {
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: rgba(44, 62, 80, 0.9);
+    padding: 1rem;
+    display: none;
+  }
+
+  .nav-links.active {
+    display: flex;
+  }
+
+  .auth-buttons {
+    margin-top: 1rem;
+  }
+
+  .channel-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .channel-card iframe {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16/9;
+  }
 }
