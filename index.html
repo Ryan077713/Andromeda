@@ -1,153 +1,159 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Andromeda Minecraft - Portal da Comunidade</title>
+  <title>Loginha Blox - Blox Fruits Store</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
-  <link href="https://fonts.cdnfonts.com/css/minecraft-4" rel="stylesheet">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <link rel="icon" href="logo.png">
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
 </head>
 <body>
-  <header>
-    <nav>
-      <div class="logo">
-        <h1>
-          <i class="fas fa-cube"></i> 
-          Andromeda Minecraft
+  <div id="app" class="app-container">
+    <div class="background-overlay"></div>
+    <header class="text-center py-4 position-relative">
+      <div class="container">
+        <h1 class="text-white mb-3 site-title">
+          Loginha Blox
         </h1>
-      </div>
-      <div class="nav-links">
-        <a href="#home"><i class="fas fa-home"></i> Home</a>
-        <a href="#youtube"><i class="fab fa-youtube"></i> YouTube</a>
-        <a href="#discord"><i class="fab fa-discord"></i> Discord</a>
-        <a href="#duvidas"><i class="fas fa-question-circle"></i> Dúvidas</a>
-        <a href="#downloads"><i class="fas fa-download"></i> Downloads</a>
-        <a href="#chat"><i class="fas fa-comments"></i> Chat</a>
-        <div class="auth-buttons">
-          <button id="loginBtn"><i class="fas fa-sign-in-alt"></i> Login</button>
-          <button id="registerBtn"><i class="fas fa-user-plus"></i> Registrar</button>
-        </div>
-      </div>
-    </nav>
-  </header>
+        
+        <nav class="navbar navbar-expand-lg navbar-dark justify-content-center">
+          <div class="navbar-nav">
+            <template v-if="!user">
+              <button @click="showLoginModal = true" class="btn btn-success me-2">Login</button>
+              <button @click="showRegisterModal = true" class="btn btn-info">Registrar</button>
+            </template>
+            <template v-else>
+              <div class="d-flex align-items-center">
+                <span class="badge bg-warning text-dark me-3">Saldo: R$ {{ user.balance.toFixed(2) }}</span>
+                
+                <div class="input-group" style="width: 250px;">
+                  <input 
+                    v-model="giftCardCode" 
+                    placeholder="Código de resgate" 
+                    class="form-control"
+                  >
+                  <button 
+                    @click="redeemGiftCard" 
+                    class="btn btn-success"
+                  >
+                    Resgatar
+                  </button>
+                </div>
 
-  <main>
-    <section id="home" class="section">
-      <h2><i class="fas fa-star"></i> Bem-vindo ao Andromeda Minecraft</h2>
-      <p>Sua comunidade épica de Minecraft! Explore, construa e divirta-se conosco.</p>
-      <div class="galaxy-animation"></div>
-    </section>
-
-    <section id="youtube" class="section">
-      <h2><i class="fab fa-youtube"></i> Nossos Canais</h2>
-      <p>Confira nossos vídeos de Minecraft, tutoriais e gameplays!</p>
-      <div class="youtube-channels">
-        <div class="channel-grid">
-          <div class="channel-card">
-            <h3>Ryan0777</h3>
-            <iframe width="280" height="157" src="https://www.youtube.com/embed?listType=user&list=@Ryan0777-b8p" frameborder="0" allowfullscreen></iframe>
-            <a href="https://www.youtube.com/@Ryan0777-b8p" target="_blank" class="channel-link">Visitar Canal</a>
+                <button @click="logout" class="btn btn-danger ms-2">Sair</button>
+              </div>
+              
+              <button @click="user.isAdmin ? showAdminPanel = true : null" 
+                      v-if="user.isAdmin" 
+                      class="btn btn-secondary me-2">
+                Painel Admin
+              </button>
+            </template>
+            <button @click="showCart = true" class="btn btn-outline-light position-relative ms-2">
+              🛒 Carrinho 
+              <span class="badge bg-danger ms-1">{{ cart.length }}</span>
+            </button>
           </div>
-          <div class="channel-card">
-            <h3>Polar0777</h3>
-            <iframe width="280" height="157" src="https://www.youtube.com/embed?listType=user&list=@polar0777" frameborder="0" allowfullscreen></iframe>
-            <a href="https://www.youtube.com/@polar0777" target="_blank" class="channel-link">Visitar Canal</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="container mt-4 products-container">
+      <section v-if="fruits.length > 0" class="row g-4">
+        <div v-for="fruit in fruits" :key="fruit.id" class="col-md-4">
+          <div class="card fruit-card animate__animated animate__fadeIn">
+            <img :src="fruit.image" :alt="fruit.name" class="card-img-top fruit-image">
+            <div class="card-body">
+              <h5 class="card-title">{{ fruit.name }} Fruit</h5>
+              <p class="card-text">{{ fruit.description }}</p>
+              <div class="d-flex justify-content-between">
+                <span class="badge bg-primary">R$ {{ fruit.price.toFixed(2) }}</span>
+                <span class="badge" :class="fruit.stock > 0 ? 'bg-success' : 'bg-danger'">
+                  {{ fruit.stock > 0 ? `Estoque: ${fruit.stock}` : 'Fora de Estoque' }}
+                </span>
+              </div>
+              <button 
+                @click="addToCart(fruit)" 
+                :disabled="fruit.stock === 0" 
+                class="btn btn-success w-100 mt-3"
+              >
+                {{ fruit.stock > 0 ? 'Adicionar ao Carrinho' : 'Indisponível' }}
+              </button>
+            </div>
           </div>
-          <div class="channel-card">
-            <h3>Nekis</h3>
-            <iframe width="280" height="157" src="https://www.youtube.com/embed?listType=user&list=@nekis5683" frameborder="0" allowfullscreen></iframe>
-            <a href="https://www.youtube.com/@nekis5683" target="_blank" class="channel-link">Visitar Canal</a>
+        </div>
+      </section>
+    </main>
+
+    <login-modal 
+      v-if="showLoginModal" 
+      @close="showLoginModal = false"
+      @login="handleLogin"
+    ></login-modal>
+
+    <register-modal 
+      v-if="showRegisterModal"
+      @close="showRegisterModal = false"
+      @register="handleRegister"
+    ></register-modal>
+
+    <cart-modal 
+      v-if="showCart"
+      :cart="cart"
+      :total="cartTotal"
+      @close="showCart = false"
+      @remove="removeFromCart"
+      @checkout="checkout"
+    ></cart-modal>
+
+    <admin-panel
+      v-if="showAdminPanel"
+      :fruits="fruits"
+      @close="closeAdminPanel"
+      @add-fruit="addFruit"
+      @update-fruit="updateFruit"
+      @delete-fruit="deleteFruit"
+    >
+      <template v-slot:extra-buttons>
+        <div class="mt-4">
+          <h5 class="text-light">Configurar Códigos de Resgate</h5>
+          <div class="row">
+            <div class="col">
+              <input v-model="newGiftCardConfig.code" placeholder="Código" class="form-control mb-2">
+              <input v-model.number="newGiftCardConfig.value" type="number" placeholder="Valor" class="form-control mb-2">
+              <button @click="createGiftCardConfig" class="btn btn-success">Adicionar Código</button>
+            </div>
+            <div class="col">
+              <table class="table table-dark">
+                <thead>
+                  <tr>
+                    <th>Código</th>
+                    <th>Valor</th>
+                    <th>Ações</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr v-for="config in giftCardConfigs" :key="config.code">
+                    <td>{{ config.code }}</td>
+                    <td>R$ {{ config.value.toFixed(2) }}</td>
+                    <td>
+                      <button @click="deleteGiftCardConfig(config.code)" class="btn btn-sm btn-danger">Excluir</button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
-          <div class="channel-card">
-            <h3>Beneh</h3>
-            <iframe width="280" height="157" src="https://www.youtube.com/embed?listType=user&list=@Beneh1" frameborder="0" allowfullscreen></iframe>
-            <a href="https://www.youtube.com/@Beneh1" target="_blank" class="channel-link">Visitar Canal</a>
-          </div>
-          <div class="channel-card">
-            <h3>Hasta0777</h3>
-            <iframe width="280" height="157" src="https://www.youtube.com/embed?listType=user&list=@Hasta0777" frameborder="0" allowfullscreen></iframe>
-            <a href="https://www.youtube.com/@Hasta0777" target="_blank" class="channel-link">Visitar Canal</a>
-          </div>
         </div>
-      </div>
-    </section>
-
-    <section id="discord" class="section">
-      <h2><i class="fab fa-discord"></i> Servidor Discord</h2>
-      <div class="discord-container">
-        <iframe src="https://discord.com/widget?id=u44b2rQpH3&theme=dark" width="350" height="500" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
-        <div class="discord-join">
-          <p>Junte-se à nossa comunidade no Discord!</p>
-          <a href="https://discord.gg/u44b2rQpH3" target="_blank" class="discord-button">
-            <i class="fab fa-discord"></i> Entrar no Servidor
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <section id="duvidas" class="section">
-      <h2><i class="fas fa-question-circle"></i> Área de Dúvidas</h2>
-      <div class="duvidas-container">
-        <div class="duvida-form">
-          <textarea placeholder="Digite sua dúvida aqui..."></textarea>
-          <button>Enviar Dúvida</button>
-        </div>
-        <div class="duvidas-list">
-          <!-- Dúvidas serão carregadas aqui -->
-        </div>
-      </div>
-    </section>
-
-    <section id="downloads" class="section vip-area">
-      <h2><i class="fas fa-crown"></i> Área VIP Minecraft</h2>
-      <div class="downloads-container">
-        <p>Acesse mapas exclusivos, texturas especiais e muito mais!</p>
-      </div>
-    </section>
-
-    <section id="chat" class="section">
-      <h2><i class="fas fa-comments"></i> Chat da Comunidade</h2>
-      <div class="chat-container">
-        <div class="chat-messages"></div>
-        <div class="chat-input">
-          <input type="text" placeholder="Digite sua mensagem...">
-          <button>Enviar</button>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <!-- Modal de Login -->
-  <div id="loginModal" class="modal">
-    <div class="modal-content">
-      <span class="close">&times;</span>
-      <h2><i class="fas fa-sign-in-alt"></i> Login</h2>
-      <form id="loginForm">
-        <input type="text" placeholder="Nome de usuário" required>
-        <input type="password" placeholder="Senha" required>
-        <button type="submit">Entrar</button>
-      </form>
-    </div>
+      </template>
+    </admin-panel>
   </div>
 
-  <!-- Modal de Registro -->
-  <div id="registerModal" class="modal">
-    <div class="modal-content">
-      <span class="close">&times;</span>
-      <h2><i class="fas fa-user-plus"></i> Registro</h2>
-      <form id="registerForm">
-        <input type="text" placeholder="Nome de usuário" required>
-        <input type="password" placeholder="Senha" required>
-        <input type="password" placeholder="Confirmar Senha" required>
-        <button type="submit">Registrar</button>
-      </form>
-    </div>
-  </div>
-
-  <footer>
-    <p>&copy; 2024 Andromeda - Portal da Comunidade. Todos os direitos reservados.</p>
-  </footer>
-
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="storage.js"></script>
   <script src="app.js"></script>
 </body>
 </html>

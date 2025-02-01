@@ -1,455 +1,78 @@
-:root {
-  --primary-color: #2c3e50;
-  --secondary-color: #27ae60;
-  --accent-color: #3498db;
-  --background-color: #1a1a1a;
-  --text-color: #ecf0f1;
-  --minecraft-font: 'MinecraftiaRegular', 'VT323', monospace;
-}
-
-@font-face {
-  font-family: 'MinecraftiaRegular';
-  src: url('https://fonts.cdnfonts.com/css/minecraft-4') format('woff');
-}
-
-* {
+body, html {
+  height: 100%;
   margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+  font-family: 'Arial', sans-serif;
 }
 
-body {
-  font-family: var(--minecraft-font);
-  line-height: 1.6;
-  background-color: var(--background-color);
-  color: var(--text-color);
-  background-image: url("data:image/svg+xml,%3Csvg width='64' height='64' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M8 8h48v48H8z' fill='%23222' fill-opacity='.1'/%3E%3C/svg%3E");
+.app-container {
+  position: relative;
+  min-height: 100vh;
+  background-color: rgba(0,0,0,0.7);
+}
+
+.background-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('/Loginha blox.webp');
+  background-size: cover;
+  background-position: center;
+  opacity: 0.5;
+  filter: brightness(1.2);
+  z-index: -1;
 }
 
 header {
-  background-color: rgba(44, 62, 80, 0.9);
-  backdrop-filter: blur(5px);
-  border-bottom: 4px solid var(--secondary-color);
-  padding: 1.5rem;
-  position: fixed;
-  width: 100%;
-  top: 0;
-  z-index: 1000;
+  background: linear-gradient(135deg, rgba(106,17,203,0.8) 0%, rgba(37,117,252,0.8) 100%);
 }
 
-nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  max-width: 1200px;
-  margin: 0 auto;
-  flex-wrap: wrap;
-  gap: 1rem;
-}
-
-.nav-links {
-  display: flex;
-  align-items: center;
-  gap: 1.5rem;
-}
-
-.nav-links a {
-  color: white;
-  text-decoration: none;
-  font-weight: 500;
-  transition: color 0.3s;
-}
-
-.nav-links a:hover {
-  color: var(--secondary-color);
-}
-
-.auth-buttons {
-  display: flex;
-  gap: 1rem;
-}
-
-button {
-  font-family: var(--minecraft-font);
-  background-color: var(--secondary-color);
-  border: 2px solid #1e8449;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  position: relative;
-  overflow: hidden;
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-button::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-  transition: 0.5s;
-}
-
-button:hover::after {
-  left: 100%;
-}
-
-main {
-  margin-top: 100px;
-  padding: 2rem;
-  max-width: 1200px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.logo h1 {
-  font-family: var(--minecraft-font);
-  font-size: 2rem;
-  background: linear-gradient(45deg, #3498db, #9b59b6);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+.site-title {
+  font-weight: bold;
+  text-shadow: 3px 3px 6px rgba(0,0,0,0.7);
   letter-spacing: 2px;
+}
+
+.products-container {
   position: relative;
-  padding-bottom: 10px;
-  white-space: nowrap;
+  z-index: 1;
 }
 
-.logo h1::after {
-  content: '';
-  position: absolute;
-  bottom: -5px;
-  left: 0;
-  width: 100%;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, var(--secondary-color), transparent);
-  animation: glow 2s infinite;
-}
-
-.section {
-  background: rgba(44, 62, 80, 0.8);
-  border: 2px solid var(--secondary-color);
-  box-shadow: 0 0 15px rgba(39, 174, 96, 0.3);
-  backdrop-filter: blur(5px);
-  margin-bottom: 3rem;
-  padding: 2rem;
-  border-radius: 8px;
-}
-
-.youtube-container, .discord-container {
-  display: flex;
-  justify-content: center;
-  margin-top: 1rem;
-}
-
-.duvidas-container {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-.duvida-form {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-.duvida-form textarea {
-  padding: 1rem;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  resize: vertical;
-  min-height: 100px;
-}
-
-.chat-container {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  height: 400px;
-}
-
-.chat-messages {
-  flex-grow: 1;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  padding: 1rem;
-  overflow-y: auto;
-  background: rgba(0, 0, 0, 0.5);
-  border: 2px solid var(--secondary-color);
-  font-family: var(--minecraft-font);
-}
-
-.chat-input {
-  display: flex;
-  gap: 1rem;
-}
-
-.chat-input input {
-  flex-grow: 1;
-  padding: 0.5rem;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-}
-
-.modal {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0,0,0,0.5);
-  z-index: 1001;
-}
-
-.modal-content {
-  background-color: white;
-  padding: 2rem;
-  border-radius: 8px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 90%;
-  max-width: 400px;
-}
-
-.close {
-  position: absolute;
-  right: 1rem;
-  top: 1rem;
-  cursor: pointer;
-  font-size: 1.5rem;
-}
-
-form {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-form input {
-  padding: 0.5rem;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-}
-
-.galaxy-animation {
-  width: 100%;
-  height: 400px;
-  background: url('/DALL·E 2025-01-21 22.22.43 - A sleek, futuristic logo with the word \'Andromeda\' in bold, modern font, placed on a dark background with subtle galaxy-themed elements like stars and.png') center/cover no-repeat;
-  margin: 2rem auto;
-  border-radius: 15px;
-  box-shadow: 0 0 30px rgba(52, 152, 219, 0.3);
-  position: relative;
-  overflow: hidden;
-  animation: pulse 4s infinite ease-in-out;
-}
-
-.galaxy-animation::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(45deg, rgba(52, 152, 219, 0.2), rgba(155, 89, 182, 0.2));
-  animation: shimmer 6s infinite linear;
-}
-
-@keyframes pulse {
-  0%, 100% { 
-    transform: scale(1);
-    box-shadow: 0 0 30px rgba(52, 152, 219, 0.3);
-  }
-  50% { 
-    transform: scale(1.02);
-    box-shadow: 0 0 50px rgba(52, 152, 219, 0.5);
-  }
-}
-
-@keyframes shimmer {
-  0% { opacity: 0.3; }
-  50% { opacity: 0.7; }
-  100% { opacity: 0.3; }
-}
-
-@keyframes glow {
-  0%, 100% { opacity: 0.5; }
-  50% { opacity: 1; }
-}
-
-.minecraft-block {
-  width: 32px;
-  height: 32px;
-  image-rendering: pixelated;
-  display: inline-block;
-  margin: 0 5px;
-  animation: bounce 1s infinite ease-in-out;
-}
-
-.vip-area {
-  background: linear-gradient(135deg, rgba(44, 62, 80, 0.9), rgba(39, 174, 96, 0.2));
-  border: 2px solid #f1c40f;
-  position: relative;
-  overflow: hidden;
-}
-
-.vip-area::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: url("data:image/svg+xml,%3Csvg width='32' height='32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h4v4H0V0zm4 4h4v4H4V4z' fill='%23f1c40f' fill-opacity='.1'/%3E%3C/svg%3E");
-  animation: scroll 20s linear infinite;
-  opacity: 0.1;
-}
-
-@keyframes scroll {
-  from { transform: translateY(0); }
-  to { transform: translateY(-50%); }
-}
-
-.youtube-channels {
-  padding: 2rem 0;
-}
-
-.channel-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 2rem;
-  justify-items: center;
-}
-
-.channel-card {
-  background: rgba(0, 0, 0, 0.3);
-  border: 2px solid var(--secondary-color);
-  border-radius: 8px;
-  padding: 1rem;
-  text-align: center;
+.fruit-card {
+  background-color: rgba(50,50,50,0.8);
+  color: white;
+  border: none;
   transition: transform 0.3s ease;
 }
 
-.channel-card:hover {
-  transform: translateY(-5px);
+.fruit-card:hover {
+  transform: scale(1.05);
 }
 
-.channel-card h3 {
-  margin-bottom: 1rem;
-  color: var(--secondary-color);
+.fruit-card .fruit-image {
+  height: 250px;  
+  width: 100%;
+  object-fit: contain;  
+  object-position: center;
+  background-color: rgba(0,0,0,0.2);
+  border-bottom: 2px solid rgba(255,255,255,0.1);
 }
 
-.channel-link {
-  display: inline-block;
-  margin-top: 1rem;
-  padding: 0.5rem 1rem;
-  background-color: var(--secondary-color);
+.fruit-card .card-body {
+  background-color: rgba(30,30,30,0.7);
+}
+
+.fruit-card .badge {
+  opacity: 0.9;
+}
+
+/* Modal and other component styles remain the same */
+.modal-content {
+  background-color: rgba(30,30,30,0.9);
   color: white;
-  text-decoration: none;
-  border-radius: 4px;
-  transition: background-color 0.3s;
 }
 
-.channel-link:hover {
-  background-color: #219a52;
-}
-
-.discord-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 2rem;
-}
-
-.discord-join {
-  text-align: center;
-}
-
-.discord-button {
-  display: inline-block;
-  padding: 1rem 2rem;
-  background-color: #7289da;
-  color: white;
-  text-decoration: none;
-  border-radius: 4px;
-  margin-top: 1rem;
-  transition: background-color 0.3s;
-}
-
-.discord-button:hover {
-  background-color: #5b6eae;
-}
-
-footer {
-  text-align: center;
-  padding: 1rem;
-  background-color: var(--primary-color);
-  color: white;
-  margin-top: 2rem;
-}
-
-.duvida {
-  background: rgba(39, 174, 96, 0.1);
-  border-left: 3px solid var(--secondary-color);
-  padding: 1rem;
-  border-radius: 4px;
-  margin-bottom: 1rem;
-}
-
-.resposta {
-  background: rgba(52, 152, 219, 0.1);
-  border-left: 3px solid var(--accent-color);
-  margin-top: 0.5rem;
-  padding: 0.5rem;
-  border-radius: 4px;
-}
-
-.duvida small {
-  display: block;
-  color: #666;
-  margin-top: 0.5rem;
-}
-
-.admin-panel {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1rem;
-  margin-top: 1rem;
-}
-
-@media (max-width: 768px) {
-  .nav-links {
-    flex-direction: column;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 100%;
-    background-color: rgba(44, 62, 80, 0.9);
-    padding: 1rem;
-    display: none;
-  }
-
-  .nav-links.active {
-    display: flex;
-  }
-
-  .auth-buttons {
-    margin-top: 1rem;
-  }
-
-  .channel-grid {
-    grid-template-columns: 1fr;
-  }
-  
-  .channel-card iframe {
-    width: 100%;
-    height: auto;
-    aspect-ratio: 16/9;
-  }
+.btn-close {
+  filter: invert(1) grayscale(100%) brightness(200%);
 }
